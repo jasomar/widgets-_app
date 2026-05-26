@@ -26,6 +26,7 @@ class _buttonsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return SizedBox(
       width: double.infinity,
       child: Padding(
@@ -35,7 +36,7 @@ class _buttonsView extends StatelessWidget {
         ),
         child: Wrap(
           spacing: 10,
-          crossAxisAlignment: WrapCrossAlignment.start,
+          alignment: WrapAlignment.center,
           children: [
             ElevatedButton(
               onPressed: () {},
@@ -51,7 +52,78 @@ class _buttonsView extends StatelessWidget {
               icon: Icon(Icons.access_alarms_rounded),
               label: Text("Elevate icon test"),
             ),
+            FilledButton(
+              onPressed: () {},
+              child: const Text("data"),
+            ),
+            FilledButton.icon(
+              onPressed: () {},
+              label: Text("dff"),
+              icon: Icon(Icons.access_alarm_rounded),
+            ),
+            OutlinedButton(
+              onPressed: () {},
+              child: Text(" test"),
+            ),
+            OutlinedButton.icon(
+              onPressed: () {},
+              label: Text("dff"),
+              icon: Icon(Icons.access_alarm_rounded),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(" test"),
+            ),
+            TextButton.icon(
+              onPressed: () {},
+              label: Text(" test"),
+              icon: Icon(Icons.account_circle),
+            ),
+
+            //ToDo custom button
+            CustomButton(),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.apartment_rounded),
+            ),
+            IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.apartment_rounded),
+              style: ButtonStyle(
+                backgroundColor: WidgetStatePropertyAll(
+                  colors.primary,
+                ),
+              ),
+            ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class CustomButton extends StatelessWidget {
+  const CustomButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(20),
+      child: Material(
+        color: colors.primary,
+        child: InkWell(
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 20,
+            ),
+            child: Text(
+              "hola mundo",
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
         ),
       ),
     );
