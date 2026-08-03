@@ -27,15 +27,39 @@ class _CardsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ...cards.map(
-          (card) => _CardType1(
-            elevation: card['elevation'],
-            label: card['label'],
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          ...cards.map(
+            (card) => _CardType1(
+              elevation: card['elevation'],
+              label: card['label'],
+            ),
           ),
-        ),
-      ],
+          ...cards.map(
+            (card) => _CardType2(
+              elevation: card['elevation'],
+              label: card['label'],
+            ),
+          ),
+
+          ...cards.map(
+            (card) => _CardType3(
+              elevation: card['elevation'],
+              label: card['label'],
+            ),
+          ),
+
+          ...cards.map(
+            (card) => _CardType4(
+              elevation: card['elevation'],
+              label: card['label'],
+            ),
+          ),
+
+          const SizedBox(height: 50),
+        ],
+      ),
     );
   }
 }
@@ -55,7 +79,154 @@ class _CardType1 extends StatelessWidget {
       elevation: elevation,
       child: Padding(
         padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
-        child: Column(children: [Icon(Icons.more_vert)]),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.more_vert),
+              ),
+            ),
+            Align(
+              alignment: AlignmentGeometry.bottomLeft,
+              child: Text(label),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardType2 extends StatelessWidget {
+  final String label;
+  final double elevation;
+
+  const _CardType2({
+    required this.label,
+    required this.elevation,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: colors.outline),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      elevation: elevation,
+
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.more_vert),
+              ),
+            ),
+            Align(
+              alignment: AlignmentGeometry.bottomLeft,
+              child: Text('$label - outline'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardType3 extends StatelessWidget {
+  final String label;
+  final double elevation;
+
+  const _CardType3({
+    required this.label,
+    required this.elevation,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: colors.outline),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      elevation: elevation,
+      color: colors.onSurfaceVariant,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(10, 5, 10, 10),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topRight,
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.more_vert),
+              ),
+            ),
+            Align(
+              alignment: AlignmentGeometry.bottomLeft,
+              child: Text('$label - colors'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _CardType4 extends StatelessWidget {
+  final String label;
+  final double elevation;
+
+  const _CardType4({
+    required this.label,
+    required this.elevation,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
+
+    return Card(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: colors.outline),
+        borderRadius: BorderRadius.all(Radius.circular(12)),
+      ),
+      elevation: elevation,
+      clipBehavior: Clip.hardEdge,
+
+      child: Stack(
+        children: [
+          Image.network(
+            'https://picsum.photos/id/${elevation.toInt()}/600/200',
+            height: 200,
+            fit: BoxFit.cover,
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                ),
+              ),
+              child: IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.more_vert),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
